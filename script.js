@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (rowIndex === colIndex) {
                         diagonal1++;
                     }
-                    if (rowIndex + colIndex === size + 1) {
+                    if (rowIndex + colIndex === size - 1) {
                         diagonal2++;
                     }
                 }
