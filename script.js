@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (rowIndex === colIndex) {
                         diagonal1++;
                     }
-                    if (rowIndex + colIndex === size - 1) {
+                    if (rowIndex + colIndex === size + 1) {
                         diagonal2++;
                     }
                 }
@@ -175,9 +175,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 winnerName = playerName;
             }
         });
+
+        const drawButton = document.getElementById('draw-number');
+        drawButton.style.display = 'none';
+
+        currentNumber.style.display = 'none';
+
+        const restartButton = document.createElement('button');
+        restartButton.textContent = 'Reiniciar Partida';
+        restartButton.addEventListener('click', function(){
+            location.reload();
+        });
+
+        drawButton.parentNode.appendChild(restartButton);
     
-        console.log('Puntos de los jugadores:', puntosJugadores);
-        console.log('El ganador es:', winnerName, 'con', maxPoints, 'puntos.');
+        document.getElementById('winner-display').textContent = `El ganador es: ${winnerName} con ${maxPoints} puntos.`;
+
+        
     }
     function getRandomNumber() {
         return Math.floor(Math.random() * 50) + 1;
