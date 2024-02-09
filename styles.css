@@ -14,9 +14,14 @@ body {
 
 .bingo-card {
     display: flex; 
+    justify-content: center;
     padding: 0;
     border: 1px solid #c9c9c9;
     margin-bottom: 20px;
+}
+
+.bingo-card{
+    justify-content: left;
 }
 
 .bingo-number {

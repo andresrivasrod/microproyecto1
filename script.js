@@ -67,8 +67,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function createBingoCard(card, playerName) {
         const cardContainer = document.createElement('div');
         cardContainer.classList.add('bingo-card');
+        const playerNameElement = document.createElement('p');
+        playerNameElement.textContent = `Jugador: ${playerName}`;
+        cardContainer.appendChild(playerNameElement);
 
         for (const row of card) {
+            
             const rowContainer = document.createElement('div');
             rowContainer.classList.add('bingo-row');
             for (const num of row) {
@@ -79,9 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             cardContainer.appendChild(rowContainer);
         }
-        const playerNameElement = document.createElement('p');
-        playerNameElement.textContent = `Jugador: ${playerName}`;
-        cardContainer.appendChild(playerNameElement);
+        
 
         return cardContainer;
     }
@@ -125,68 +127,58 @@ document.addEventListener('DOMContentLoaded', function () {
     function endGame() {
         console.log('Partida finalizada. Calculando puntos...');
         const allCards = document.querySelectorAll('.bingo-card');
-
         let maxPoints = -1;
         let winnerName = '';
-
-        for (let i = 0; i < allCards.length; i++) {
-            const cardNumbers = allCards[i].querySelectorAll('.bingo-number');
+        let puntosJugadores = {}; // Objeto para almacenar los puntos de cada jugador
+    
+        allCards.forEach(card => {
+            const playerName = card.querySelector('p').textContent.split(": ")[1];
+            const cardNumbers = card.querySelectorAll('.bingo-number');
             const size = Math.sqrt(cardNumbers.length);
-
             let rows = Array.from({ length: size }, () => 0);
             let cols = Array.from({ length: size }, () => 0);
             let diagonal1 = 0;
             let diagonal2 = 0;
             let totalPoints = 0;
-
-            for (let j = 0; j < cardNumbers.length; j++) {
-                const numElement = cardNumbers[j];
+    
+            cardNumbers.forEach((numElement, index) => {
                 if (numElement.classList.contains('matched-number')) {
-                    const rowIndex = Math.floor(j / size);
-                    const colIndex = j % size;
-
+                    const rowIndex = Math.floor(index / size);
+                    const colIndex = index % size;
                     rows[rowIndex]++;
                     cols[colIndex]++;
-
                     if (rowIndex === colIndex) {
                         diagonal1++;
                     }
-
                     if (rowIndex + colIndex === size - 1) {
                         diagonal2++;
                     }
                 }
+            });
+    
+            if (rows.some(row => row === size) || cols.some(col => col === size)) {
+                totalPoints += 1; // Sumar un punto por línea horizontal o vertical llena
             }
-
-            if (rows.every(row => row === size)) {
-                totalPoints += 1;
-            }
-
-            if (cols.every(col => col === size)) {
-                totalPoints += 1;
-            }
-
+    
             if (diagonal1 === size || diagonal2 === size) {
-                totalPoints += 3;
+                totalPoints += 3; // Sumar un punto por diagonal llena
             }
-
-            victories[`Jugador ${i + 1}`] = totalPoints;
-
-            if (totalPoints > maxPoints) {
-                maxPoints = totalPoints;
-                winnerName = `Jugador ${i + 1}`;
+    
+            if (puntosJugadores[playerName]) {
+                puntosJugadores[playerName] += totalPoints;
+            } else {
+                puntosJugadores[playerName] = totalPoints;
             }
-        }
-
-        console.log(`El jugador con más puntos es: ${winnerName}`);
-        console.log(`Puntos obtenidos: ${maxPoints}`);
+    
+            if (puntosJugadores[playerName] > maxPoints) {
+                maxPoints = puntosJugadores[playerName];
+                winnerName = playerName;
+            }
+        });
+    
+        console.log('Puntos de los jugadores:', puntosJugadores);
+        console.log('El ganador es:', winnerName, 'con', maxPoints, 'puntos.');
     }
-    
-    
-    
-
-    // Otras funciones auxiliares
-
     function getRandomNumber() {
         return Math.floor(Math.random() * 50) + 1;
     }
