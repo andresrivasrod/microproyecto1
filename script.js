@@ -59,12 +59,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Mostrar los cartones de cada jugador
         for (let i = 0; i < players.length; i++) {
-            const playerCard = createBingoCard(cards[i]);
+            const playerCard = createBingoCard(cards[i], players[i]);
             bingoBoard.appendChild(playerCard);
         }
     }
 
-    function createBingoCard(card) {
+    function createBingoCard(card, playerName) {
         const cardContainer = document.createElement('div');
         cardContainer.classList.add('bingo-card');
 
@@ -79,6 +79,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             cardContainer.appendChild(rowContainer);
         }
+        const playerNameElement = document.createElement('p');
+        playerNameElement.textContent = `Jugador: ${playerName}`;
+        cardContainer.appendChild(playerNameElement);
 
         return cardContainer;
     }
@@ -95,25 +98,91 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }
+        checkGameStatus();
+    }
+
+    function checkGameStatus() {
+        const allCards = document.querySelectorAll('.bingo-card');
+
+        for (let i = 0; i < allCards.length; i++) {
+            const cardNumbers = allCards[i].querySelectorAll('.bingo-number');
+            let cardCompleted = true;
+
+            for (const numElement of cardNumbers) {
+                if (!numElement.classList.contains('matched-number')) {
+                    cardCompleted = false;
+                    break;
+                }
+            }
+
+            if (cardCompleted) {
+                endGame();
+                return;
+            }
+        }
     }
 
     function endGame() {
-        let maxPoints = -1;
-        let winners = [];
+        console.log('Partida finalizada. Calculando puntos...');
+        const allCards = document.querySelectorAll('.bingo-card');
 
-        for (const player in victories) {
-            const points = victories[player];
-            if (points > maxPoints) {
-                maxPoints = points;
-                winners = [player];
-            } else if (points === maxPoints) {
-                winners.push(player);
+        let maxPoints = -1;
+        let winnerName = '';
+
+        for (let i = 0; i < allCards.length; i++) {
+            const cardNumbers = allCards[i].querySelectorAll('.bingo-number');
+            const size = Math.sqrt(cardNumbers.length);
+
+            let rows = Array.from({ length: size }, () => 0);
+            let cols = Array.from({ length: size }, () => 0);
+            let diagonal1 = 0;
+            let diagonal2 = 0;
+            let totalPoints = 0;
+
+            for (let j = 0; j < cardNumbers.length; j++) {
+                const numElement = cardNumbers[j];
+                if (numElement.classList.contains('matched-number')) {
+                    const rowIndex = Math.floor(j / size);
+                    const colIndex = j % size;
+
+                    rows[rowIndex]++;
+                    cols[colIndex]++;
+
+                    if (rowIndex === colIndex) {
+                        diagonal1++;
+                    }
+
+                    if (rowIndex + colIndex === size - 1) {
+                        diagonal2++;
+                    }
+                }
+            }
+
+            if (rows.every(row => row === size)) {
+                totalPoints += 1;
+            }
+
+            if (cols.every(col => col === size)) {
+                totalPoints += 1;
+            }
+
+            if (diagonal1 === size || diagonal2 === size) {
+                totalPoints += 3;
+            }
+
+            victories[`Jugador ${i + 1}`] = totalPoints;
+
+            if (totalPoints > maxPoints) {
+                maxPoints = totalPoints;
+                winnerName = `Jugador ${i + 1}`;
             }
         }
 
-        console.log('Puntos de los jugadores:', victories);
-        console.log('Ganador(es):', winners);
+        console.log(`El jugador con más puntos es: ${winnerName}`);
+        console.log(`Puntos obtenidos: ${maxPoints}`);
     }
+    
+    
     
 
     // Otras funciones auxiliares
