@@ -191,9 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         drawButton.parentNode.appendChild(restartButton);
-    
         document.getElementById('winner-display').textContent = `El ganador es: ${winnerName} con ${maxPoints} puntos.`;
-
         
     }
     function getRandomNumber() {
