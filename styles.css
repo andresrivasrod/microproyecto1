@@ -1,15 +1,30 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #220279;
+    color: #ffffff;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #2d21d7;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#button{
+    display: block;
+    text-align: center;
+    width: 110px;
+    border: none;
+    background: #3882f6;
+    padding: 10px;
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Roboto', arial;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .bingo-card {
@@ -22,6 +37,7 @@ body {
 
 .bingo-card{
     justify-content: left;
+    color: #000000;
 }
 
 .bingo-number {
