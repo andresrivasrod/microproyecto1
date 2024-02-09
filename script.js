@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const bingoBoard = document.getElementById('bingo-board');
     const drawButton = document.getElementById('draw-number');
     const currentNumber = document.getElementById('current-number');
+    drawButton.style.display = 'none';
 
     let currentPlayer = 0;
     let turnCounter = 0;
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const players = playerNames.split(',').map(name => name.trim());
             const totalPlayers = players.length;
             const bingoCards = generateBingoCards(totalPlayers, boardSize);
+            drawButton.style.display = 'initial';
             startGame(players, bingoCards);
         } else {
             alert('Por favor, ingresa nombres de jugadores y un tamaño de cartón válido.');
