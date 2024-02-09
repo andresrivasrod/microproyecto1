@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function startGame(players, cards) {
+        startButton.style.display = 'none';
         console.log('¡Juego de Bingo iniciado!');
         console.log('Jugadores:', players);
         console.log('Cartones:', cards);
