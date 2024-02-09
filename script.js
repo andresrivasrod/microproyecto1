@@ -159,12 +159,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
     
-            if (rows.some(row => row === size) || cols.some(col => col === size)) {
-                totalPoints += 1; // Sumar un punto por línea horizontal o vertical llena
+            if (rows.some(row => row === size)) {
+                totalPoints += 1; 
+                alert(`${playerName} lleno fila suma un punto. Total: ${totalPoints}`)
+            }
+            
+            if(cols.some(col => col === size)){
+                totalPoints += 1;
+                alert(`${playerName} lleno columna suma un punto. Total: ${totalPoints}`)
             }
     
-            if (diagonal1 === size || diagonal2 === size) {
-                totalPoints += 3; // Sumar un punto por diagonal llena
+            if (diagonal1 === size) {
+                totalPoints += 3; 
+                alert(`${playerName} lleno diagonal suma tres puntos. Total: ${totalPoints}`)
+            }
+
+            if (diagonal2 === size) {
+                totalPoints += 3; 
+                alert(`${playerName} lleno diagonal suma tres puntos. Total: ${totalPoints}`)
             }
     
             if (puntosJugadores[playerName]) {
