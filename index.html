@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablero de Bingo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tablero de Bingo</h1>
+        <form id="player-form">
+            <label for="player-names">Nombres de los jugadores:</label>
+            <input type="text" id="player-names" placeholder="Separados por comas">
+            <br>
+            <label for="board-size">Tamaño del cartón (n x n):</label>
+            <input type="number" id="board-size" min="3" max="5">
+            <br>
+            <button id="start-game">Comenzar Juego</button>
+        </form>
+        <div id="bingo-board"></div>
+        <button id="draw-number">Sacar Número</button>
+        <p id="current-number"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
