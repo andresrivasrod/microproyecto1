@@ -156,18 +156,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (rowIndex + colIndex === size - 1) {
                         diagonal2++;
                     }
+
+                    if(rows[rowIndex] === size){
+                        totalPoints += 1;
+                        alert(`${playerName} lleno fila suma tres puntos. Total: ${totalPoints}`)
+                    }
+
+                    if(cols[colIndex] === size){
+                        totalPoints += 1;
+                        alert(`${playerName} lleno columna suma tres puntos. Total: ${totalPoints}`)
+                    }
+
+
                 }
             });
-    
-            if (rows.some(row => row === size)) {
-                totalPoints += 1; 
-                alert(`${playerName} lleno fila suma un punto. Total: ${totalPoints}`)
-            }
-            
-            if(cols.some(col => col === size)){
-                totalPoints += 1;
-                alert(`${playerName} lleno columna suma un punto. Total: ${totalPoints}`)
-            }
     
             if (diagonal1 === size) {
                 totalPoints += 3; 
