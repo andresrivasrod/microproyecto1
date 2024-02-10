@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
         drawButton.style.display = 'none';
     
         const restartButton = document.createElement('button');
-        restartButton.textContent = 'Reiniciar Partida';
+        restartButton.textContent = 'Nueva Partida';
         restartButton.addEventListener('click', function(){
             window.location.href = 'index.html';
         });
@@ -229,11 +229,12 @@ document.addEventListener('DOMContentLoaded', function () {
             playerScore.textContent = `${playerName}: Puntaje total: ${puntosJugadores[playerName]}`;
             playerScoresElement.appendChild(playerScore);
         }
-    
+
+
         const sortedPlayers = [...new Set([...Object.keys(puntosJugadores), ...Object.keys(victories)])].sort((a, b) => victories[b] - victories[a]);
 
         const tableButton = document.createElement('button');
-        tableButton.textContent = 'Ver tabla de jugadores y victorias';
+        tableButton.textContent = 'Victorias Acumuladas';
         tableButton.addEventListener('click', function(){
             bingoBoard.style.display = 'none';
             drawButton.style.display = 'none';
@@ -242,6 +243,8 @@ document.addEventListener('DOMContentLoaded', function () {
             startButton.style.display = 'none';
             playerForm.style.display = 'none';
             tableButton.style.display = 'none';
+            document.getElementById('winner-display').style.display = 'none';
+            playerScoresElement.style.display = 'none';
             const tableContainer = document.createElement('div');
             
             const table = document.createElement('table');
@@ -264,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
             tableContainer.appendChild(table);
             
-            playerScoresElement.appendChild(tableContainer);
+            drawButton.parentNode.appendChild(tableContainer);
         });
     
         playerScoresElement.appendChild(tableButton);

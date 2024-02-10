@@ -24,6 +24,7 @@ button{
     font-family: 'Roboto', arial;
     text-decoration: none;
     font-weight: bold;
+    margin-top: 2em;
 }
 
 .bingo-card {
@@ -56,11 +57,11 @@ button{
     background-color: #4caf50; 
 }
 
-/* Estilos para la tabla de jugadores */
 .player-table {
     margin-top: 20px;
     border-collapse: collapse;
     width: 100%;
-    background-color: #3bfffc;
-    color: #000000;
+    background-color: #4697cd;
+    color: #ffffff;
+    font-weight: bold;
 }
