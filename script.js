@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const randomNum = getRandomNumber();
         currentNumber.textContent = `Número obtenido: ${randomNum}`;
         turnCounter++;
-        counter.textContent = `Contador de turno: ${turnCounter}`;
+        counter.textContent = `Turno: ${turnCounter}`;
         checkAndUpdateCards(randomNum);
         if (turnCounter >= 25) {
             endGame();
@@ -64,8 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function startGame(players, cards) {
         startButton.style.display = 'none';
-
-
+        playerForm.style.display = 'none';
         // Mostrar los cartones de cada jugador
         for (let i = 0; i < players.length; i++) {
             const playerCard = createBingoCard(cards[i], players[i]);
@@ -134,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function endGame() {
-        console.log('Partida finalizada. Calculando puntos...');
         const allCards = document.querySelectorAll('.bingo-card');
         let maxPoints = -1;
         let winnerName = '';
@@ -201,6 +199,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
+        if (victories[winnerName]) {
+            victories[winnerName]++;
+        } else {
+            victories[winnerName] = 1;
+        }      
+        
+        localStorage.setItem('victories', JSON.stringify(victories));
+
         const drawButton = document.getElementById('draw-number');
         drawButton.style.display = 'none';
 
@@ -208,11 +214,24 @@ document.addEventListener('DOMContentLoaded', function () {
         const restartButton = document.createElement('button');
         restartButton.textContent = 'Reiniciar Partida';
         restartButton.addEventListener('click', function(){
-            location.reload();
+            window.location.href = 'index.html';
         });
-
         drawButton.parentNode.appendChild(restartButton);
-        document.getElementById('winner-display').textContent = `El ganador es: ${winnerName} con ${maxPoints} puntos.`;
+
+        if(maxPoints <= 0){
+            document.getElementById('winner-display').textContent = `Nadie gano, todos obtuvieron 0 puntos.`;
+        }else{
+            document.getElementById('winner-display').textContent = `El ganador es: ${winnerName} con ${maxPoints} puntos.`;
+        }
+
+        const playerScoresElement = document.getElementById('player-scores');
+        playerScoresElement.innerHTML = '';
+
+        for (const playerName in puntosJugadores) {
+            const playerScore = document.createElement('p');
+            playerScore.textContent = `${playerName}: Puntaje total: ${puntosJugadores[playerName]}, Victorias acumuladas: ${victories[playerName] || 0}`;
+            playerScoresElement.appendChild(playerScore);
+        }
         
     }
     function getRandomNumber() {
