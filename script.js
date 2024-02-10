@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const bingoBoard = document.getElementById('bingo-board');
     const drawButton = document.getElementById('draw-number');
     const currentNumber = document.getElementById('current-number');
+    const counter = document.getElementById('counter');
     drawButton.style.display = 'none';
 
     let currentPlayer = 0;
@@ -30,8 +31,9 @@ document.addEventListener('DOMContentLoaded', function () {
     drawButton.addEventListener('click', function () {
         const randomNum = getRandomNumber();
         currentNumber.textContent = `Número obtenido: ${randomNum}`;
-        checkAndUpdateCards(randomNum);
         turnCounter++;
+        counter.textContent = `Contador de turno: ${turnCounter}`;
+        checkAndUpdateCards(randomNum);
         if (turnCounter >= 25) {
             endGame();
         }
@@ -41,10 +43,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const cards = [];
         for (let i = 0; i < numPlayers; i++) {
             const card = [];
+            const selectedNumbers = new Set();
             for (let row = 0; row < size; row++) {
                 const rowNumbers = [];
                 for (let col = 0; col < size; col++) {
-                    const randomNum = Math.floor(Math.random() * 50) + 1;
+                    let randomNum;
+                    do {
+                        randomNum = Math.floor(Math.random() * 50) + 1;
+                    } while (selectedNumbers.has(randomNum));
+                    selectedNumbers.add(randomNum);
                     rowNumbers.push(randomNum);
                 }
                 card.push(rowNumbers);
@@ -53,12 +60,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return cards;
     }
+    
 
     function startGame(players, cards) {
         startButton.style.display = 'none';
-        console.log('¡Juego de Bingo iniciado!');
-        console.log('Jugadores:', players);
-        console.log('Cartones:', cards);
+
 
         // Mostrar los cartones de cada jugador
         for (let i = 0; i < players.length; i++) {
@@ -142,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let cols = Array.from({ length: size }, () => 0);
             let diagonal1 = 0;
             let diagonal2 = 0;
+            let full = 0;
             let totalPoints = 0;
     
             cardNumbers.forEach((numElement, index) => {
@@ -159,12 +166,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if(rows[rowIndex] === size){
                         totalPoints += 1;
-                        alert(`${playerName} lleno fila suma tres puntos. Total: ${totalPoints}`)
+                        full += 1;
                     }
 
                     if(cols[colIndex] === size){
                         totalPoints += 1;
-                        alert(`${playerName} lleno columna suma tres puntos. Total: ${totalPoints}`)
                     }
 
 
@@ -173,14 +179,16 @@ document.addEventListener('DOMContentLoaded', function () {
     
             if (diagonal1 === size) {
                 totalPoints += 3; 
-                alert(`${playerName} lleno diagonal suma tres puntos. Total: ${totalPoints}`)
             }
 
             if (diagonal2 === size) {
                 totalPoints += 3; 
-                alert(`${playerName} lleno diagonal suma tres puntos. Total: ${totalPoints}`)
             }
-    
+
+            if (full === size){
+                totalPoints += 5;
+            }
+
             if (puntosJugadores[playerName]) {
                 puntosJugadores[playerName] += totalPoints;
             } else {
@@ -196,7 +204,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const drawButton = document.getElementById('draw-number');
         drawButton.style.display = 'none';
 
-        currentNumber.style.display = 'none';
 
         const restartButton = document.createElement('button');
         restartButton.textContent = 'Reiniciar Partida';
@@ -209,6 +216,11 @@ document.addEventListener('DOMContentLoaded', function () {
         
     }
     function getRandomNumber() {
-        return Math.floor(Math.random() * 50) + 1;
+        let randomNum;
+        do{
+            randomNum = Math.floor(Math.random() * 50) + 1;
+        }while (bingoNumbers.includes(randomNum));
+         bingoNumbers.push(randomNum);
+         return randomNum;
     }
 });
