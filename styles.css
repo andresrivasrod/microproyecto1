@@ -55,3 +55,12 @@ button{
 .bingo-number.matched-number {
     background-color: #4caf50; 
 }
+
+/* Estilos para la tabla de jugadores */
+.player-table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #3bfffc;
+    color: #000000;
+}

@@ -161,32 +161,30 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (rowIndex + colIndex === size - 1) {
                         diagonal2++;
                     }
-
+    
                     if(rows[rowIndex] === size){
                         totalPoints += 1;
                         full += 1;
                     }
-
+    
                     if(cols[colIndex] === size){
                         totalPoints += 1;
                     }
-
-
                 }
             });
     
             if (diagonal1 === size) {
                 totalPoints += 3; 
             }
-
+    
             if (diagonal2 === size) {
                 totalPoints += 3; 
             }
-
+    
             if (full === size){
                 totalPoints += 5;
             }
-
+    
             if (puntosJugadores[playerName]) {
                 puntosJugadores[playerName] += totalPoints;
             } else {
@@ -198,26 +196,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 winnerName = playerName;
             }
         });
-
+    
         if (victories[winnerName]) {
             victories[winnerName]++;
         } else {
             victories[winnerName] = 1;
         }      
-        
+    
         localStorage.setItem('victories', JSON.stringify(victories));
-
+    
         const drawButton = document.getElementById('draw-number');
         drawButton.style.display = 'none';
-
-
+    
         const restartButton = document.createElement('button');
         restartButton.textContent = 'Reiniciar Partida';
         restartButton.addEventListener('click', function(){
             window.location.href = 'index.html';
         });
         drawButton.parentNode.appendChild(restartButton);
-
+    
         if(maxPoints <= 0){
             document.getElementById('winner-display').textContent = `Nadie gano, todos obtuvieron 0 puntos.`;
         }else{
@@ -229,11 +226,50 @@ document.addEventListener('DOMContentLoaded', function () {
 
         for (const playerName in puntosJugadores) {
             const playerScore = document.createElement('p');
-            playerScore.textContent = `${playerName}: Puntaje total: ${puntosJugadores[playerName]}, Victorias acumuladas: ${victories[playerName] || 0}`;
+            playerScore.textContent = `${playerName}: Puntaje total: ${puntosJugadores[playerName]}`;
             playerScoresElement.appendChild(playerScore);
         }
-        
+    
+        const sortedPlayers = [...new Set([...Object.keys(puntosJugadores), ...Object.keys(victories)])].sort((a, b) => victories[b] - victories[a]);
+
+        const tableButton = document.createElement('button');
+        tableButton.textContent = 'Ver tabla de jugadores y victorias';
+        tableButton.addEventListener('click', function(){
+            bingoBoard.style.display = 'none';
+            drawButton.style.display = 'none';
+            counter.style.display = 'none';
+            currentNumber.style.display = 'none';
+            startButton.style.display = 'none';
+            playerForm.style.display = 'none';
+            tableButton.style.display = 'none';
+            const tableContainer = document.createElement('div');
+            
+            const table = document.createElement('table');
+            table.classList.add('player-table')
+            const headerRow = table.insertRow();
+            const playerNameHeader = headerRow.insertCell(0);
+            playerNameHeader.textContent = 'Jugador';
+            const victoriesHeader = headerRow.insertCell(1);
+            victoriesHeader.textContent = 'Victorias acumuladas';
+    
+            sortedPlayers.forEach(playerName => {
+                if (victories[playerName] > 0) {
+                    const row = table.insertRow();
+                    const playerNameCell = row.insertCell(0);
+                    playerNameCell.textContent = playerName;
+                    const victoriesCell = row.insertCell(1);
+                    victoriesCell.textContent = victories[playerName];
+                }
+            });
+    
+            tableContainer.appendChild(table);
+            
+            playerScoresElement.appendChild(tableContainer);
+        });
+    
+        playerScoresElement.appendChild(tableButton);
     }
+    
     function getRandomNumber() {
         let randomNum;
         do{
