@@ -153,8 +153,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const size = Math.sqrt(cardNumbers.length);
             let rows = Array.from({ length: size }, () => 0);
             let cols = Array.from({ length: size }, () => 0);
-            let diagonal1 = 0;
-            let diagonal2 = 0;
+            let diagonal1 = 0; //Contador de diagonal tipo 1 (de izquierda arriba a derecha abajo)
+            let diagonal2 = 0; //Contador de diagonal tipo 2 (de derecha arriba a izquierda abajo)
             let full = 0;
             let totalPoints = 0;
     
@@ -164,33 +164,33 @@ document.addEventListener('DOMContentLoaded', function () {
                     const colIndex = index % size;
                     rows[rowIndex]++;
                     cols[colIndex]++;
-                    if (rowIndex === colIndex) {
+                    if (rowIndex === colIndex) {  //Si el indice de columna y fila es igual sumamos 1 al diagonal de tipo 1
                         diagonal1++;
                     }
-                    if (rowIndex + colIndex === size - 1) {
+                    if (rowIndex + colIndex === size - 1) {  //Si la suma del indice de columna y de fila es igual al tamaño del carton menos 1 sumamos 1 al diagonal de tipo 2
                         diagonal2++;
                     }
     
-                    if(rows[rowIndex] === size){
-                        totalPoints += 1;
+                    if(rows[rowIndex] === size){  //Si las filas en el indice dado es igual al tamaño tenemos una fila llena, sumamos 1 al total y 1 al contador de si esta lleno el carton
+                        totalPoints += 1; 
                         full += 1;
                     }
     
-                    if(cols[colIndex] === size){
-                        totalPoints += 1;
+                    if(cols[colIndex] === size){  //Si las columnas en el indice dado es igual al tamaño tenemos una columna llena, sumamos 1 al total
+                        totalPoints += 1; 
                     }
                 }
             });
     
-            if (diagonal1 === size) {
+            if (diagonal1 === size) {  //Si el contador de diagonal tipo 1 es igual al tamaño tenemos esta diagonal completa
                 totalPoints += 3; 
             }
     
-            if (diagonal2 === size) {
+            if (diagonal2 === size) { //Si el contador de diagonal tipo 2 es igual al tamaño tenemos esta diagonal completa
                 totalPoints += 3; 
             }
     
-            if (full === size){
+            if (full === size){ //Si el contador de carton lleno es igual al tamaño tenemos carton lleno
                 totalPoints += 5;
             }
     
@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let randomNum;
         do{
             randomNum = Math.floor(Math.random() * 50) + 1;
-        }while (bingoNumbers.includes(randomNum));
+        }while (bingoNumbers.includes(randomNum)); //Aseguramos que el numero que salga no haya salido antes
          bingoNumbers.push(randomNum);
          return randomNum;
     }
