@@ -83,6 +83,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const playerNameElement = document.createElement('p');
         playerNameElement.textContent = `Jugador: ${playerName}`;
         cardContainer.appendChild(playerNameElement);
+        const space = document.createElement('p');
+        space.classList.add('space');
+        space.textContent = '.............................';
+        cardContainer.appendChild(space);
 
         for (const row of card) {
             

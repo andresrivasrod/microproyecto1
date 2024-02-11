@@ -8,8 +8,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>BINGO</h1>
+        <div class="title">
+            <h1>BINGO</h1>
+        </div>
         <form id="player-form">
+            <p>Bienvenido al Bingo virtual, ingresa los nombres de los jugadores participantes separados por comas e ingresa el tamaño de los cartones (3x3, 4x4, 5x5).</p>
+            <p>Reglas:</p>
+            <ul>
+                <li>Se jugaran 25 turnos como maximo, si un jugador llena su carton se acaba inmediatamente la partida</li>
+                <li>Gana quien sume mas puntos al final de la partida</li>
+                <li>Una linea horizontal suma 1 punto</li>
+                <li>Una linea vertical suma 1 punto</li>
+                <li>Una linea diagonal suma 3 puntos</li>
+                <li>Llenar el carton suma 5 puntos</li>
+            </ul>
             <label for="player-names">Nombres de los jugadores:</label>
             <input type="text" id="player-names" placeholder="Separados por comas">
             <br>

@@ -4,11 +4,6 @@ body {
     color: #ffffff;
 }
 
-h1{
-    color: #ffd500;
-    font-size: 50px;
-}
-
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -16,6 +11,13 @@ h1{
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #32445c;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    color: #ffd500;
+    font-size: 40px;
 }
 
 button{
@@ -37,6 +39,12 @@ button{
     padding: 0;
     border: 1px solid #c9c9c9;
     margin-bottom: 20px;
+    border-radius: 10px;
+    background: #1F2937;
+}
+
+.space{
+    color: #1F2937;
 }
 
 .player-card{
