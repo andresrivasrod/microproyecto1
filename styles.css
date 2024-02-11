@@ -57,11 +57,24 @@ button{
     background-color: #4caf50; 
 }
 
-.player-table {
+.number-counter {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+table {
     margin-top: 20px;
     border-collapse: collapse;
     width: 100%;
     background-color: #4697cd;
     color: #ffffff;
     font-weight: bold;
+    border: 5px solid #000;
 }
+th, td {
+    width: 25%;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #000;
+    border-spacing: 0;
+ }
