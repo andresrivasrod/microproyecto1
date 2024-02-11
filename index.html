@@ -12,10 +12,10 @@
             <h1>BINGO</h1>
         </div>
         <form id="player-form">
-            <p>Bienvenido al Bingo virtual, ingresa los nombres de los jugadores participantes separados por comas e ingresa el tamaño de los cartones (3x3, 4x4, 5x5).</p>
+            <p>Bienvenido al Bingo virtual, ingresa los nombres de los jugadores participantes separados por comas, ingresa el tamaño de los cartones (3x3, 4x4, 5x5) y el numero de turnos que desea jugar (25-50).</p>
             <p>Reglas:</p>
             <ul>
-                <li>Se jugaran 25 turnos como maximo, si un jugador llena su carton se acaba inmediatamente la partida</li>
+                <li>Se jugaran entre 25 y 50 turnos como maximo, si un jugador llena su carton se acaba inmediatamente la partida</li>
                 <li>Gana quien sume mas puntos al final de la partida</li>
                 <li>Una linea horizontal suma 1 punto</li>
                 <li>Una linea vertical suma 1 punto</li>
@@ -29,6 +29,9 @@
             <label for="board-size">Tamaño del cartón (n x n):</label>
             <input type="number" id="board-size" min="3" max="5">
             <br>
+            <br>
+            <label for="turns">Turnos en la partida:</label>
+            <input type="number" id="tunrs" min="25" max="50">
             <button id="start-game">Comenzar Juego</button>
         </form>
         <div id="bingo-board"></div>

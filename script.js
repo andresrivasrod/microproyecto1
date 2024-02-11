@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const currentNumber = document.getElementById('current-number');
     const counter = document.getElementById('counter');
     drawButton.style.display = 'none';
-
     let turnCounter = 0;
     let bingoNumbers = [];
     let victories = JSON.parse(localStorage.getItem('victories')) || {};
@@ -15,25 +14,27 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
         const playerNames = document.getElementById('player-names').value;
         const boardSize = parseInt(document.getElementById('board-size').value);
-
-        if (playerNames && boardSize >= 3 && boardSize <= 5) {
+        
+        const turns = parseInt(document.getElementById('tunrs').value);
+        if (playerNames && boardSize >= 3 && boardSize <= 5 && turns >= 25 && turns <=50) {
             const players = playerNames.split(',').map(name => name.trim());
             const totalPlayers = players.length;
             const bingoCards = generateBingoCards(totalPlayers, boardSize);
             drawButton.style.display = 'initial';
             startGame(players, bingoCards);
         } else {
-            alert('Por favor, ingresa nombres de jugadores y un tamaño de cartón válido.');
+            alert('Por favor, ingresa nombres de jugadores, un tamaño de cartón y un numero de turnos valido.');
         }
     });
 
     drawButton.addEventListener('click', function () {
         const randomNum = getRandomNumber();
+        const turns = parseInt(document.getElementById('tunrs').value);
         currentNumber.textContent = `Número obtenido: ${randomNum}`;
         turnCounter++;
         counter.textContent = `Turno: ${turnCounter}`;
         checkAndUpdateCards(randomNum);
-        if (turnCounter >= 25) {
+        if (turnCounter >= turns) {
             endGame();
         }
     });
