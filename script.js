@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function createBingoCard(card, playerName) {
         const cardContainer = document.createElement('div');
         cardContainer.classList.add('bingo-card');
-        const playerNameElement = document.createElement('p');
+        const playerNameElement = document.createElement('span');
         playerNameElement.textContent = `Jugador: ${playerName}`;
         cardContainer.appendChild(playerNameElement);
 
