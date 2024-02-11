@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cardContainer.appendChild(playerNameElement);
         const space = document.createElement('p');
         space.classList.add('space');
-        space.textContent = '.............................';
+        space.textContent = '.......................';
         cardContainer.appendChild(space);
 
         for (const row of card) {
