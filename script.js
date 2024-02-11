@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
         playerScoresElement.appendChild(playerScore);
 
 
-        const sortedPlayers = [...new Set([...Object.keys(puntosJugadores), ...Object.keys(victories)])].sort((a, b) => victories[b] - victories[a]);
+        const sortedPlayers = [...new Set([...Object.keys(victories)])].sort((a, b) => victories[b] - victories[a]);
 
         const tableButton = document.createElement('button');
         tableButton.textContent = 'Victorias Acumuladas';
