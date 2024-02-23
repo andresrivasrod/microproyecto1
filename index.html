@@ -12,30 +12,31 @@
             <h1>BINGO</h1>
         </div>
         <form id="player-form">
-            <p>Bienvenido al Bingo virtual, ingresa los nombres de los jugadores participantes separados por comas, ingresa el tamaño de los cartones (3x3, 4x4, 5x5) y el numero de turnos que desea jugar (25-50).</p>
-            <p>Reglas:</p>
+            <p>Welcome to the Bingo simulator! Write the names of the participants separated by comas (,), put the size of the boards 
+            (3x3, 4x4, 5x5) and how many turns do you want to play (25-50).</p>
+            <p>Rules:</p>
             <ul>
-                <li>Se jugaran entre 25 y 50 turnos como maximo, si un jugador llena su carton se acaba inmediatamente la partida</li>
-                <li>Gana quien sume mas puntos al final de la partida</li>
-                <li>Una linea horizontal suma 1 punto</li>
-                <li>Una linea vertical suma 1 punto</li>
-                <li>Una linea diagonal suma 3 puntos</li>
-                <li>Llenar el carton suma 5 puntos</li>
+                <li>If a player fills his board the game will end</li>
+                <li>The player with the most points wins</li>
+                <li>Horizontal line earns you 1 point</li>
+                <li>Vertical line earns you 1 point</li>
+                <li>Diagonal line earns you 3 points</li>
+                <li>Full board earns you 5 extra points</li>
             </ul>
-            <label for="player-names">Nombres de los jugadores:</label>
-            <input type="text" id="player-names" placeholder="Separados por comas">
+            <label for="player-names">Names:</label>
+            <input type="text" id="player-names" placeholder="Separated by comas">
             <br>
             <br>
-            <label for="board-size">Tamaño del cartón (n x n):</label>
+            <label for="board-size">Board size:</label>(n x n):</label>
             <input type="number" id="board-size" min="3" max="5">
             <br>
             <br>
-            <label for="turns">Turnos en la partida:</label>
+            <label for="turns">Number of turns:</label>
             <input type="number" id="tunrs" min="25" max="50">
-            <button id="start-game">Comenzar Juego</button>
+            <button id="start-game">Start Game</button>
         </form>
         <div id="bingo-board"></div>
-        <button id="draw-number">Sacar Número</button>
+        <button id="draw-number">Get Number</button>
         <div class="number-counter">
             <p id="current-number"></p>
             <p id ="counter"></p>

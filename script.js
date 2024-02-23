@@ -23,16 +23,16 @@ document.addEventListener('DOMContentLoaded', function () {
             drawButton.style.display = 'initial';
             startGame(players, bingoCards);
         } else {
-            alert('Por favor, ingresa nombres de jugadores, un tamaño de cartón y un numero de turnos valido.');
+            alert('Please put the names of the players, a board size and the number of turns to be played.');
         }
     });
 
     drawButton.addEventListener('click', function () {
         const randomNum = getRandomNumber();
         const turns = parseInt(document.getElementById('tunrs').value);
-        currentNumber.textContent = `Número obtenido: ${randomNum}`;
+        currentNumber.textContent = `Number: ${randomNum}`;
         turnCounter++;
-        counter.textContent = `Turno: ${turnCounter}`;
+        counter.textContent = `Turn: ${turnCounter}`;
         checkAndUpdateCards(randomNum);
         if (turnCounter >= turns) {
             endGame();
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         startButton.style.display = 'none';
         playerForm.style.display = 'none';
         const restartButton = document.createElement('button');
-        restartButton.textContent = 'Nueva Partida';
+        restartButton.textContent = 'New Game';
         restartButton.addEventListener('click', function(){
             window.location.href = 'index.html';
         });
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const cardContainer = document.createElement('div');
         cardContainer.classList.add('bingo-card');
         const playerNameElement = document.createElement('p');
-        playerNameElement.textContent = `Jugador: ${playerName}`;
+        playerNameElement.textContent = `Player: ${playerName}`;
         cardContainer.appendChild(playerNameElement);
         const space = document.createElement('p');
         space.classList.add('space');
@@ -219,9 +219,9 @@ document.addEventListener('DOMContentLoaded', function () {
         drawButton.style.display = 'none';
     
         if(maxPoints <= 0){
-            document.getElementById('winner-display').textContent = `Nadie gano, todos obtuvieron 0 puntos.`;
+            document.getElementById('winner-display').textContent = `Nobody won.`;
         }else{
-            document.getElementById('winner-display').textContent = `El ganador es: ${winnerName} con ${maxPoints} puntos. 🏆`;
+            document.getElementById('winner-display').textContent = `The winner is: ${winnerName} with ${maxPoints} points. 🏆`;
         }
 
         const playerScoresElement = document.getElementById('player-scores');
@@ -231,9 +231,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const playerScore = document.createElement('table');
         const headerRow = playerScore.insertRow();
         const playerNameHeader = headerRow.insertCell();
-        playerNameHeader.textContent = 'Jugador';
+        playerNameHeader.textContent = 'Player';
         const pointsHeader = headerRow.insertCell();
-        pointsHeader.textContent = 'Puntos Obtenidos'
+        pointsHeader.textContent = 'Points'
         for (const playerName in puntosJugadores) {
             const row = playerScore.insertRow();
             const playerNameCell = row.insertCell();
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const sortedPlayers = [...new Set([...Object.keys(victories)])].sort((a, b) => victories[b] - victories[a]);
 
         const tableButton = document.createElement('button');
-        tableButton.textContent = 'Victorias Acumuladas';
+        tableButton.textContent = 'Total Wins';
         tableButton.addEventListener('click', function(){
             bingoBoard.style.display = 'none';
             drawButton.style.display = 'none';
@@ -265,9 +265,9 @@ document.addEventListener('DOMContentLoaded', function () {
             table.classList.add('player-table')
             const headerRow = table.insertRow();
             const playerNameHeader = headerRow.insertCell(0);
-            playerNameHeader.textContent = 'Jugador';
+            playerNameHeader.textContent = 'Player';
             const victoriesHeader = headerRow.insertCell(1);
-            victoriesHeader.textContent = 'Victorias acumuladas';
+            victoriesHeader.textContent = 'Total Wins';
     
             sortedPlayers.forEach(playerName => {
                 if (victories[playerName] > 0) {
