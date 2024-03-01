@@ -89,3 +89,10 @@ th, td {
     border: 1px solid #000;
     border-spacing: 0;
  }
+
+ @media (max-width: 600px) {
+    .bingo-number {
+        width: 35px;
+        height: 35px;
+    }
+ }
